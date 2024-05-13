@@ -1,23 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User</title>
+    <title></title>
 </head>
 <body>
-
 <div>
     <table border="1">
         <tr>
             <th>Username</th>
             <th>Lastname</th>
+            <th>Link</th>
         </tr>
-        <tr>
+        <tr th:each="user : ${users}">
             <td th:utext="${user.getUsername()}">...</td>
             <td th:utext="${user.getLastName()}">...</td>
+            <td><a th:href="@{admin/show(id=${user.getId()})}">Edit</a></td>
         </tr>
     </table>
 </div>
+
+<br/>
+<hr/>
+
+<a href="/admin/new">Create new user</a>
+
+<br/>
+<hr/>
 
 <form th:method="POST" th:action="@{/logout}">
     <input type="submit" value="Log out"/>
