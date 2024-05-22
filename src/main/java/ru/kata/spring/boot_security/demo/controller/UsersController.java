@@ -25,7 +25,7 @@ public class UsersController {
 
     @GetMapping
     public String showUser(ModelMap model, Principal principal) {
-        model.addAttribute("user", userService.show(userService.findByUsername(principal.getName()).getId()));
-        return "user";
+        model.addAttribute("user", userService.findByUsername(principal.getName()));
+        return "user-index";
     }
 }
