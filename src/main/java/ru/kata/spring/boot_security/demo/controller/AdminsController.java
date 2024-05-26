@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.kata.spring.boot_security.demo.model.User;
+import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 import org.springframework.ui.ModelMap;
 import org.springframework.ui.Model;
@@ -20,17 +21,19 @@ import java.security.Principal;
 @RequestMapping("/admin")
 public class AdminsController {
     private final UserService userService;
+    private final RoleService roleService;
 
     @Autowired
-    public AdminsController(UserService userService) {
+    public AdminsController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @GetMapping
     public String getUsers(Model model, Principal principal) {
         model.addAttribute("users", userService.findAll());
         model.addAttribute("authUser", userService.findByUsername(principal.getName()));
-        model.addAttribute("rolesList", userService.findAllRoles());
+        model.addAttribute("rolesList", roleService.findAllRoles());
         return "admin-index";
     }
 

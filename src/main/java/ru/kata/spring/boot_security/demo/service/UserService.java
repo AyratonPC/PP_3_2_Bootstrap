@@ -13,6 +13,5 @@ public interface UserService extends UserDetailsService {
     List<User> findAll();
     void delete(long id);
     User show(long id);
-    List<Role> findAllRoles();
     User findByUsername(String username);
 }
